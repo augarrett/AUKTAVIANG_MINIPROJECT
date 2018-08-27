@@ -1,44 +1,45 @@
 # Stelligent Mini-Project
 
 ### Problem
-Design, code, and test provisionng an environment in AWS.  The code needs to provision the environment resources and configure a web server.  The home page should display a static HTML page with the words: "Automation for the People"
+Design, code, and test provisioning an environment in AWS.  The code needs to provision the environment resources and configure a web server.  The home page should display a static HTML page with the words: "Automation for the People"
 
 ### Assumptions:
 - I assumed that this is a fresh AWS account with no configuration/setup outside of IAM user existing with a provisioned API credentials and full permissions to EC2. 
-**Note: Normally would operate with a least priviledge model and only give access to the necessary service. For instance granting full EC2 access gives the user access to ECS which is not needed.**
+**Note: Normally you want to operate with a least privilege model and only give access to the necessary AWS services. For instance granting full EC2 access gives the user access to ECS which is not needed.**
 - With those api credentials, store them in your path at **~/.aws/credentials**
-- Private key for access to EC2 instance during provisining and testing
+- Private key for access to EC2 instance during provisioning and testing
 - Linux/MacOS environment with docker in $PATH
-- User has NOPASSWD set for sudo
+- User is not required to supply sudo
 
 
 ### Design/Overview
 ---
 Use [terraform](https://www.terraform.io/) (an infrastructure as code tool) to create necessary AWS resources.
-1) Create vpc named "Main VPC"
+1) Create VPC named "Main VPC"
 2) Create internet gateway for VPC
 3) Create routing table for VPC
 4) Create subnet for VPC
 5) Create security groups to allow access
 6) Create a key pair from private key passed in
-7) Reach out to AWS to query for latest Ubuntu-16.04 ami in the default region
+7) Reach out to AWS to query for latest Ubuntu-16.04 AMI in the default region
 8) Create EC2 instance
-9) Create inventory file needed for ansible
+9) Create inventory file needed for Ansible
 
-Use ansible role **stelligent** to provision EC2 instance(s) created via terraform
-1) Use pre task to make sure python exists. Its needed for ansible
+Use Ansible role **stelligent** to provision EC2 instance(s) created via terraform
+1) Use pre task to make sure python exists. Its needed for Ansible
 2) Copy Code to remote host (index.html, dockerfile, nginx.conf)
 3) Add docker gpg key, and install docker on host
-4) Enable stelligent service and gurantee it will always restart
+4) Enable stelligent service and guarantee it will always restart
 
-Use inspec to test AWS resources, provisioned ec2 instances(s), and control container
-1) After infra has been built, run the inspec profile to audit the correctness of our deployment
+Use Inspec to test AWS resources, provisioned EC2 instances(s), and control container
+1) After infra has been built, run the Inspec profile to audit the correctness of our deployment
 2) After the deployment has been created and verified, use the integration profile to check the host(s) if they have been provisioned correctly
 
 
 
 ### Pre-requisites:
 - git
+- curl
 - docker >= 17.12
     - [MacOSx Docker Install](https://docs.docker.com/docker-for-mac/install/)
     - [Ubuntu Docker Install](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
@@ -82,12 +83,15 @@ Here is a list of some of the test that were ran and which they apply to.  This 
 1) Make sure VPC, subnet, route table, aws_key exist
 2) Make sure ec2 instance is up and running, with correct instance type
 3) Logging into EC2 to make sure docker is installed, the service stelligent was created properly
+
 ### Cleanup
 ---
 To cleanup environment execute the command below.  This will log into docker container if it still exists, destroy infra created, remove docker container, then remove docker image that was created
 ```
 chmod +x cleanup.sh && ./cleanup.sh
 ```
+
+**Note: Please make sure to cleanup.  Resources are created in AWS and you will be charged for what you leave around**
 
 
 ### Things to consider
