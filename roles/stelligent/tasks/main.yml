@@ -1,0 +1,43 @@
+---
+# tasks file for stelligent
+
+    - block:       # Main Block -- used for applying sudo to entire role"
+      - name: Copy items to node
+        copy: 
+          src: "{{item}}"
+          dest: /home/ubuntu
+        with_items:
+          - src
+          - Dockerfile.nginx
+          - nginx.conf
+
+      - name:    Add Docker GPG key
+        apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+      - name:    Add Docker APT repository
+        apt_repository:
+          repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+          update_cache: yes
+        register: add_repo
+        until: add_repo|success
+        retries: 3
+
+      - name: Install Docker
+        apt:  name=docker-ce
+
+      - name: add user to docker group
+        command: usermod -aG docker {{ ansible_ssh_user }}
+      
+      - name: Create docker image
+        command: docker build -t stelligent -f Dockerfile.nginx .
+      
+      - name: Copy stelligent service to node
+        copy: src=stelligent.service dest=/etc/systemd/system/
+        changed_when: true
+        notify: restart service
+
+      - name: "enable service"
+        systemd:
+          name: "stelligent"
+          enabled: "yes"
+  

@@ -1,0 +1,10 @@
+- name: Run stelligent playbook
+  gather_facts: false
+  hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+  pre_tasks:
+    - raw: test -e /usr/bin/python || (apt update && apt install -y python-minimal)
+  roles:
+    - stelligent

@@ -1,0 +1,8 @@
+name: unittest
+title: HTTP/EC2 Instance
+maintainer: Auktavian Garrett
+copyright: Auktavian Garrett
+copyright_email: auktavian.garrett@gmail.com
+license: Apache-2.0
+summary: A way to verify the successful deployment of AWS resources to create a HTTP server
+version: 0.1.0

@@ -1,0 +1,8 @@
+.terraform
+*.tfstate
+inventory
+*.DS_Store
+test/verify/files/terraform.json
+terraform.tfstate.backup
+ansible/
+playbook.retry

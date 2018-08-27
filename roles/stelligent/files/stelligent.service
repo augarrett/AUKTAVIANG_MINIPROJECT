@@ -1,0 +1,24 @@
+[Unit]
+Description=Stelligent service
+# start this unit only after docker has started
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+TimeoutStartSec=0
+Restart=always
+# The following lines start with '-' because they are allowed to fail without
+# causing startup to fail.
+#
+# Kill the old instance, if it's still running for some reason
+ExecStartPre=-/usr/bin/docker kill stelligent
+# Remove the old instance, if it stuck around
+ExecStartPre=-/usr/bin/docker rm stelligent
+
+# Start the actual service; note we remove the instance after it exits
+ExecStart=/usr/bin/docker run --rm --name stelligent -p 80:80  stelligent
+# On exit, stop the container
+ExecStop=/usr/bin/docker stop stelligent
+ 
+[Install]
+WantedBy=multi-user.target

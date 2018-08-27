@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Auktavian Garrett
+  description: An Ansible role for installing the stelligent service on an ec2 instance
+  company: Auktavian Garret Inc.
+  min_ansible_version: 2.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - cloud
+    - linux
+    - system
+dependencies: []
