@@ -4,7 +4,7 @@
 Design, code, and test provisioning an environment in AWS.  The code needs to provision the environment resources and configure a web server.  The home page should display a static HTML page with the words: "Automation for the People"
 
 ### Assumptions:
-- I assumed that this is a fresh AWS account with no configuration/setup outside of IAM user existing with a provisioned API credentials and full permissions to EC2. 
+- I assumed that this is a fresh AWS account running in us-east-1 region with no configuration/setup outside of IAM user existing with a provisioned API credentials and full permissions to EC2.
 **Note: Normally you want to operate with a least privilege model and only give access to the necessary AWS services. For instance granting full EC2 access gives the user access to ECS which is not needed.**
 - With those api credentials, store them in your path at **~/.aws/credentials**
 - Private key for access to EC2 instance during provisioning and testing
@@ -103,7 +103,7 @@ These are a few items I thought about along then way.  They are not scoped for t
 3) Segementing the VPC to smaller networks across different AZ's. This will allow for adding autoscaling group to enhance and map out reliability and help with disaster recovery
 4) Add loadbalancer to properly distribute traffic to nodes
 5) Add ssl for secure transport with server. (Can use letsencrypt with a DNS server)
-6) Using a front end framework to allow enabling testing of client code.  (Can use react for front end development Jest. Jest is bundled with React)
+6) Using a front end framework to allow enabling testing of client code.  (Can use react for front end development and Jest for testing since Jest is bundled with React)
 7) Stress/negative testing
 8) Add logging to help diagnose problems
 9) Enable monitoring.  Can use cloud trail and cloudwatch 
