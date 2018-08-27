@@ -28,8 +28,8 @@ variable "username" {
   description = "Username of ec2 instance"
 }
 
-variable "cloud9_ami" {
-  description = "AMI used by cloud9 team. Defaults to grabbing the latest in the region"
+variable "ami" {
+  description = "Defaults to grabbing the latest AMI in the region"
 }
 
 variable "subnet_id" {

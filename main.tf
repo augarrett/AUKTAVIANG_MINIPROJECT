@@ -77,11 +77,11 @@ resource "aws_key_pair" "auth" {
 
 module "ubuntu16" {
   source            = "./instance"
-  cloud9_ami        = "${data.aws_ami.ubuntu16.id}"
+  ami               = "${data.aws_ami.ubuntu16.id}"
   key_name          = "${aws_key_pair.auth.id}"
   username          = "ubuntu"
   group_name        = "ubuntu16"
   subnet_id         = "${aws_subnet.public.id}"
   security_group_id = "${aws_security_group.default.id}"
-  private_key_path = "${var.private_key_path}"
+  private_key_path  = "${var.private_key_path}"
 }
