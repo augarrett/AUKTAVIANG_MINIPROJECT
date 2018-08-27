@@ -9,6 +9,7 @@ Design, code, and test provisionng an environment in AWS.  The code needs to pro
 - With those api credentials, store them in your path at **~/.aws/credentials**
 - Private key for access to EC2 instance during provisining and testing
 - Linux/MacOS environment with docker in $PATH
+- User has NOPASSWD set for sudo
 
 
 ### Design/Overview
@@ -40,7 +41,12 @@ Use inspec to test AWS resources, provisioned ec2 instances(s), and control cont
 - git
 - docker >= 17.12
     - [MacOSx Docker Install](https://docs.docker.com/docker-for-mac/install/)
-    - [Ubuntu Docker Install]()
+    - [Ubuntu Docker Install](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+    You can use the commnand here to install docker via a shell script
+    ```
+    curl -L https://get.docker.com/ | sh
+    usermod -aG docker $(whoami)
+    ```
     - [CentOS-7 Docker Install](https://docs.docker.com/install/linux/docker-ce/centos/)
 - Private key to connect to ec2 instance 
     -  We are building things in docker containers, adding private keys to docker images is frowned upon. Instead we add the private key at runtime of the container and it is destroyed when the container is removed.
@@ -52,7 +58,13 @@ To get started clone the repo
 git clone https://github.com/augarrett/AUKTAVIANG_MINIPROJECT
 ```
 
-Run the following. Please make sure to supply the path to your private key
+Run the following. Please make sure to supply the path to your private key.
+
+If you dont have a private key available you can create one using the following. This will create a key file at ~/.ssh/id_rsa
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
 ```
 chmod +x run.sh && ./run.sh <<location_of_private_key>>
 ```
