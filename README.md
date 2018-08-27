@@ -92,7 +92,8 @@ These are a few items I thought about along then way.  They are not scoped for t
 12) Adding retry logic for areas that I have seen crop up with networking issues
 13) Use packer to create AMI's that can be quickly used vs installing everything on a vanilla host
 14) Manage terraform state in the cloud instead of locally
-15) Add once again more test :-)
+15) Add to CI/CD pipeline
+15) And once again more test :-)
 
 
 
