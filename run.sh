@@ -12,6 +12,7 @@ PRIV_KEY_LOC=$1
 # Check if credentials file exists
 if [ ! -f ~/.aws/credentials ]; then
     echo "AWS credentials file does not exist. Please make sure one is located at ~/.aws/credentials"
+    die
 fi
 
 # AWS credentials
@@ -26,6 +27,15 @@ fi
 # Create build image to run scripts
 echo "Building docker image for run"
 docker build -t stelligent -f Dockerfile . || die
+
+# In the current setup we share the state between container and host which causes a problem on 
+# initial build when no state files exist. We will check for the file here and if it doesn't exist then
+# we will create one
+if [ ! -f terraform.tfstate ]; then
+    echo "Terraform file doesn't exist"
+    touch terraform.tfstate
+    touch terraform.tfstate.backup
+fi
 
 # Create docker container sharing terraform state files between container and host
 docker run -d -it -v $PRIV_KEY_LOC:/root/.id_rsa -v $AWS_FILE:/root/.aws/credentials \

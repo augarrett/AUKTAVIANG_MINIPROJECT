@@ -1,6 +1,12 @@
 #!/bin/bash
 set -xe
 
+# verify test/verify/files directory exist.  Needed to dynamically test AWS resources
+if [ ! -f "test/verify/files" ]; then
+    echo "Creating files directory"
+    mkdir -p test/verify/files
+fi
+
 # Use terraform to get priv_key_loc and public ip
 PRIV_KEY_LOC=$(terraform output priv_key_loc)
 HOST_IP=$(terraform output public_ip)
