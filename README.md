@@ -29,7 +29,7 @@ Use Ansible role **stelligent** to provision EC2 instance(s) created via terrafo
 1) Use pre task to make sure python exists. Its needed for Ansible
 2) Copy Code to remote host (index.html, dockerfile, nginx.conf)
 3) Add docker gpg key, and install docker on host
-4) Enable stelligent service and guarantee it will always restart
+4) Enable Stelligent service and guarantee it will always restart
 
 Use Inspec to test AWS resources, provisioned EC2 instances(s), and control container
 1) After infra has been built, run the Inspec profile to audit the correctness of our deployment
@@ -43,13 +43,13 @@ Use Inspec to test AWS resources, provisioned EC2 instances(s), and control cont
 - docker >= 17.12
     - [MacOSx Docker Install](https://docs.docker.com/docker-for-mac/install/)
     - [Ubuntu Docker Install](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-    You can use the commnand here to install docker via a shell script
+    You can use the command here to install docker via a shell script
     ```
     curl -L https://get.docker.com/ | sh
     usermod -aG docker $(whoami)
     ```
     - [CentOS-7 Docker Install](https://docs.docker.com/install/linux/docker-ce/centos/)
-- Private key to connect to ec2 instance 
+- Private key to connect to EC2 instance 
     -  We are building things in docker containers, adding private keys to docker images is frowned upon. Instead we add the private key at runtime of the container and it is destroyed when the container is removed.
 - AWS Credentials stored in ~/.aws/credentials
 
