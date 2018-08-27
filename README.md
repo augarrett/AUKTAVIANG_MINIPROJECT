@@ -51,6 +51,10 @@ Use Inspec to test AWS resources, provisioned EC2 instances(s), and control cont
     - [CentOS-7 Docker Install](https://docs.docker.com/install/linux/docker-ce/centos/)
 - Private key to connect to EC2 instance 
     -  We are building things in docker containers, adding private keys to docker images is frowned upon. Instead we add the private key at runtime of the container and it is destroyed when the container is removed.
+    - You will need a private key to continue. If you dont have a private key available you can create one using the following.
+    ```
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ```
 - AWS Credentials stored in ~/.aws/credentials
 
 ### Getting Started:
@@ -58,12 +62,7 @@ To get started clone the repo
 ```
 git clone https://github.com/augarrett/AUKTAVIANG_MINIPROJECT
 ```
-
-You will need a private key to continue. If you dont have a private key available you can create one using the following.
-```
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-Run the following to setup environment, run ansible playbook, run inspec test
+Change to cloned directory and run the following to setup environment, run ansible playbook, run inspec test
 
 ```
 chmod +x run.sh && ./run.sh <<location_of_private_key>>
