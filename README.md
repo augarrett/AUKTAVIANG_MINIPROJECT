@@ -58,12 +58,11 @@ To get started clone the repo
 git clone https://github.com/augarrett/AUKTAVIANG_MINIPROJECT
 ```
 
-Run the following. Please make sure to supply the path to your private key.
-
-If you dont have a private key available you can create one using the following. This will create a key file at ~/.ssh/id_rsa
+You will need a private key to continue. If you dont have a private key available you can create one using the following.
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
+Run the following to setup environment, run ansible playbook, run inspec test
 
 ```
 chmod +x run.sh && ./run.sh <<location_of_private_key>>
