@@ -73,9 +73,12 @@ Example
 chmod +x run.sh cleanup.sh &&  ./run.sh <<location_of_private_key>> && ./cleanup.sh
 ```
 
+If everything is successful then you will be presented with a IP address that you can use to browse a web page 
+Please visit the url at http://x.x.x.x
+
 ### Testing
 ---
-To test the deployment I decided to use [inspec](https://www.inspec.io/) because of its flexibility.  Using inspec I was able to test AWS resources, the ec2 instance that was created via ssh, and the docker container being used as the control node in the setup.
+To test the deployment I decided to use [Inspec](https://www.inspec.io/) because of its flexibility.  Using Inspec I was able to test AWS resources, the EC2 instance that was created via ssh, and the docker container being used as the control node in the setup.
 
 Here is a list of some of the test that were ran and which they apply to.  This is not an exhaustive list as well as full coverage.  I did not take into account negative testing, stress testing, black box testing but can be added as the test suite grows
 
