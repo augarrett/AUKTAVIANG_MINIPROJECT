@@ -37,6 +37,7 @@ Use inspec to test AWS resources, provisioned ec2 instances(s), and control cont
 
 
 ### Pre-requisites:
+- git
 - docker >= 17.12
     - [MacOSx Docker Install](https://docs.docker.com/docker-for-mac/install/)
     - [Ubuntu Docker Install]()
@@ -46,7 +47,12 @@ Use inspec to test AWS resources, provisioned ec2 instances(s), and control cont
 - AWS Credentials stored in ~/.aws/credentials
 
 ### Getting Started:
-To get started run the following. Please make sure to supply the path to your private key
+To get started clone the repo
+```
+git clone https://github.com/augarrett/AUKTAVIANG_MINIPROJECT
+```
+
+Run the following. Please make sure to supply the path to your private key
 ```
 chmod +x run.sh && ./run.sh <<location_of_private_key>>
 ```
